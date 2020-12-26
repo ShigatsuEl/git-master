@@ -37,7 +37,7 @@ git config user.email #유저 이메일을 확인
 윈도우에서 `core.autocrlf = true`로 설정하게 되면 git에 저장할 때 \r(carriage return)을 삭제하게 되고 다시 깃에서 윈도우로 받아올 때는 \r(carriage return)을 붙혀서 가져오게 됩니다.<br>
 반대로 맥에서는 `core,autocrlf = input`로 설정하게 되면 git에서 받아올 때는 별다른 수정을 하지 않으나 저장할 때는 \r(carriage return)을 삭제해 줍니다.<br>
 맥에서 carriage return이 들어가지 않음에도 삭제해주는 이유는 실수로 carriage return이 들어갈 수 있기 때문에 방지해주는 역할을 하는 것 입니다.(아래 사진 참고)<br>
-![01-1](01-1.png)
+![01-1](./01-1.PNG)
 
 ```
 git config --global core.autocrlf true #윈도우 전용
@@ -67,7 +67,7 @@ git config --h #위 help의 shortcut
 ## Git 초기화하고 Github에 push하기
 
 먼저 Github에 push하기 위해서는 Git WorkFlow 흐름에 대해서 정확히 알고 있어야 한다.<br>
-![01-2](01-2.png)
+![01-2](./01-2.PNG)
 Git WorkFlow는 총 3가지 작업환경으로 나누어져 있습니다.<br>
 
 1. 우리가 프로젝트의 파일을 수정하고 작업하고 있는 `working directory`가 있고<br>
