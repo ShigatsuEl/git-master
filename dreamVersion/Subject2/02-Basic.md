@@ -63,3 +63,39 @@ git clean -fd #untrack된 파일들을 모두 제거합니다.
 git mv from.txt to.txt
 git mv from.text /logs/from.text #전자 파일을 후자 위치로 이동한다.
 ```
+
+## Viewing the Staged/Unstaged changes
+
+```
+git status # 깃의 상태를 전체적으로 볼 수 있다.
+git status -s #깃의 상태를 전체적으로 보되, 단축해서 보여줍니다.
+git diff # Working directory의 바뀐 부분을 보여줍니다,
+git diff --staged # Staged Area의 바뀐 부분을 보여줍니다.
+git diff --cached # Staged Area의 바뀐 부분을 보여주는 또 다른 명령어 입니다.
+```
+
+## Visual Diff Tool
+
+### Open .gitconfig and add below
+
+```
+difftool을 사용하기 위해 git config --global -e를 사용해 설정을 바꿔주어야 합니다.
+[diff]
+  tool = vscode
+[difftool "vscode"]
+  cmd = code --wait --diff $LOCAL $REMOTE
+```
+
+### Run Diff Tool
+
+```
+git difftool // difftool을 실행합니다.
+```
+
+## Commit
+
+```
+git commit #staged된 파일들을 커밋합니다.
+git commit -m "Commit message" # 커밋메시지와 함께 staged 파일들을 커밋합니다.
+git commit -am "Commit message" # git add .을 생략하고도 git commit -am을 통해 한번에 커밋메시지와 함께 커밋할 수 있습니다.
+```
