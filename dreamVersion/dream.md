@@ -52,3 +52,37 @@ Working Directory에는 2가지로 분류될 수 있습니다.<br>
 ![02-4](./Subject2/02-4.PNG)
 또한 커밋을 1, 2, 3 ... 순으로 하기보단 위와 같이 무엇을 했는지 알 수 있게 하나하나 의미있는 이름을 지정해서 히스토리를 바라봤을 때 어디서 무엇을 작업했는지 알 수 있게 작성하는 것이 좋습니다.<br>
 이렇게 의미있는 이름으로 저장을 하게되면 내가 코드 유지보수를 하는 것도 쉬워지며 원하지 않는 커밋의 취소도 쉬워집니다.<br>
+
+## Git 명령어가 있는 것과 없는 것의 차이
+
+깃 명령어가 없으면 작업 디렉토리에서만 적용되지만 깃 명령어와 함께라면 staging area에도 적용이 되는 것 같다.
+
+```
+rm c.txt // working directory에서만 삭제된다.
+vs
+git rm c.txt // working directory에서 삭제되는 것 뿐만 아니라 staging area에도 삭제된 로그가 기록된다.
+
+rm 명령어만 그런 것이 아니고 대체적으로 git에서도 사용할 수 있는 명령어는 거의 git과 같이 쓰면 statging area에 적용되고 아니면 working directory에만 적용이 되는 듯 하다.
+```
+
+## Git 수정 내역 취소하기
+
+```
+1) git add 이전, stage에 올리지 않은 경우
+git checkout 명령어를 사용해 수정 내역을 취소할 수 있다.
+git checkout .(repository 내 전부 취소)
+git checkout file_name(지정된 파일만 취소)
+git checkout folder_name(지정된 폴더만 취소)
+
+2) git add 이후 stage에 올라간 경우
+git reset을 통해 취소할 수 있다.
+
+3) git commit을 한 경우
+git reset --hard HEAD^ // commit을 취소하고 내용도 삭제함
+git reset --soft // commit을 취소하고 내용은 staged 상태로 남겨둠
+git reset HEAD^ // commit을 취소하고 내용은 unstaged 상태로 남겨둠
+
+4) git push를 한 경우
+git reset HEAD^ // local repository에서 commit을 하나 되돌림(여러개 하고 싶다면 HEAD뒤에 ^을 개수만큼 붙이면 됨)
+git push origin master // 원격 저장소에 커밋하나 뺀 채로 저장
+```
