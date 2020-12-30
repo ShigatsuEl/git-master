@@ -100,3 +100,22 @@ git log --oneline #깃 로그를 한줄로 보여주며 짧은 해시코드도 �
 git checkout (커밋해쉬코드) #해시코드를 가진 커밋을 head로 원하는 시점으로 돌아갈 수 있다.
 git checkout master #마스터를 head로 이동
 ```
+
+## Git Log Format
+
+브랜치가 여러개 있을 때 Git Log를 좀 더 명확하게 보고 싶다면 format을 지정해서 브랜치별로 history를 보는 것이 가능하다.<br>
+![02-6](./Subject2/02-6.PNG)
+
+```
+먼저 위 사진과 같이 format하는 방법은 다음과 같다.
+
+git log --graph --all --pretty=format:'%C(yellow)[%ad]%C(reset) %C(green)[%h]%C(reset) | %C(white)%s %C(bold red){{%an}}%C(reset) %C(bold blue)%d%C(reset)' --date=short
+굉장히 심플해서 한눈으로도 알아보기 쉽다.
+문제점은 format해서 보고 싶을 때마다 위의 긴 명령어를 입력해야한다는 것이다.
+따라서 이런 귀찮은 짓을 생략하기 위해 alias 명령어를 통해 단축키를 지정해줄 것이다.
+
+git config --global alias.logformat "log --graph --all --pretty=format:'%C(yellow)[%ad]%C(reset) %C(green)[%h]%C(reset) | %C(white)%s %C(bold red){{%an}}%C(reset) %C(bold blue)%d%C(reset)' --date=short"
+
+이제 나는 단 하나의 명령어만 있으면 된다.
+git logformat
+```
