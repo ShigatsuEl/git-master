@@ -119,3 +119,18 @@ git config --global alias.logformat "log --graph --all --pretty=format:'%C(yello
 이제 나는 단 하나의 명령어만 있으면 된다.
 git logformat
 ```
+
+## Git Tag
+
+![02-7](./Subject2/02-7.PNG)
+Git Hitstory에 커밋들이 매우 많아지기 시작한다면 자신이 원할 때 특정 커밋으로 돌아가고 싶을 때 어려움이 있을 수 있습니다.<br>
+내가 특정한 커밋을 북마크해두고 싶을 때 사용하는 것이 바로 `git tag`입니다.<br>
+북마크를 함으로써 빠르게 특정 시점으로 전환할 수 있습니다.<br>
+대부분 북마크를 버전으로 지정하며 `semantic versioning`이라는 시스템을 따라갑니다.<br>
+![02-8](./Subject2/02-8.PNG)
+semantic versioning은 major minor fix로 나뉘는데
+
+1. major(전체적인 업데이트가 발생했을 때 갱신)
+2. minor(일부 기능들이 업데이트 되었을 때 갱신)
+3. fix(오류 개선을 했을 때 갱신)
+   과 같은 3가지로 구분합니다.<br>
