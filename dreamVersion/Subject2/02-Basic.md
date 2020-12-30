@@ -99,3 +99,100 @@ git commit #staged된 파일들을 커밋합니다.
 git commit -m "Commit message" # 커밋메시지와 함께 staged 파일들을 커밋합니다.
 git commit -am "Commit message" # git add .을 생략하고도 git commit -am을 통해 한번에 커밋메시지와 함께 커밋할 수 있습니다.
 ```
+
+## Log & History
+
+### See History
+
+```
+git log #커밋 리스트를 볼 수 있습니다.
+git log --patch #각 커밋 사이의 다른 점을 볼 수 있다.
+git log -p #--patch의 shortcut
+git log --state #abbreviated states for each commit
+git log --oneline #커밋 리스트를 한줄로 볼 수 있다.
+git log --oneline --reverse #커밋 리스트를 가장 첫번째에 한 것부터 순서대로 볼 수 있다.(한 줄로)
+```
+
+### Filtering
+
+```
+git log -2 #가장 최신 커밋으로부터 2개의 커밋을 보여줌
+git log --author="ellie" #작성자가 ellie인 커밋만 보여줌
+git log --before="2020-09-29" #2020-09-29이전의 커밋을 보여줌
+git log --after="one week ago" #일주일 전 이후의 커밋을 보여줌
+git log --grep="message" #message라는 이름을 가진 커밋을 찾아서 보여줌
+git log -S="code" #코드 내에 code가 들어있는 커밋을 보여줌
+git log file.txt #file.txt에 관련된 커밋들만 보여줌
+```
+
+### History of a File
+
+```
+git log file.txt #file.txt의 기록을 보여줌
+git log --state file.txt #file.txt의 상태만 보여줌
+git log --patch file.txt #file.txt의 변화된 부분을 보여줌
+```
+
+### HEAD & Hash Code
+
+```
+git log HEAD #HEAD부터 커밋 리스트를 보여줌
+git log HEAD~1 #HEAD 이전의 커밋부터 커밋 리스트를 보여줌
+git log hash #해쉬코드 커밋 이전부터 커밋 리스트를 보여줌
+```
+
+### Viewing a commit
+
+```
+git show HEAD #HEAD 커밋을 상세하게 보여줍니다.
+git show hash #해쉬 코드의 커밋을 상세하게 보여줍니다.
+git show hash:file.txt #해쉬코드의 커밋 중 file.txt에 해당하는 부분만 보여줍니다.
+```
+
+### Comparing
+
+```
+git diff hash1 hash2 #두 커밋 사이의 다른 점을 상세하게 보여줌
+git diff hash1 hash2 file.txt #두 커밋 사이에서 file.txt의 다른 부분을 보여줌
+```
+
+## Tagging
+
+### Creating
+
+```
+git tag v1.0.0 #마지막 커밋에 태그를 붙입니다.
+git tag v1.0.0 hash #특정 커밋에 태그를 붙입니다.
+git show v1.0.0 #특정 태그를 상세하게 보여줍니다.
+git tag -a v.1.0.0 -m "message" #태그에 설명을 붙일 수 있습니다.
+```
+
+### Listing
+
+```
+git tag #모든 태그를 리스트로 보여줍니다.
+git tag -l "v1.0.*" #버전 1.0으로 시작하는 모든 태그를 리스트로 보여줌
+```
+
+### Deleting
+
+```
+git tag -d v1.0.0 #특정 버전의 태그를 삭제합니다.
+```
+
+### Syncing with Remote
+
+```
+git push origin v1.0.0 #특정 태그를 원격 저장소에 푸쉬
+git push origin --tags #모든 태그들을 원격 저장소에 푸쉬
+git push origin --delete v1.0.0 #특정 커밋을 원격 저장소에서 삭제
+```
+
+### Checking out Tags
+
+```
+git checkout v1.0.0 #특정 태그로 이동합니다.(HEAD는 특정 태그가 됨)
+git checkout -b branchName v1.0.0 #특정 태그로부터 브랜치를 생성합니다.
+```
+
+[(C)Dream Coding Academy](https://academy.dream-coding.com/)
