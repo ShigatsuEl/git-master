@@ -79,10 +79,24 @@ git reset을 통해 취소할 수 있다.
 
 3) git commit을 한 경우
 git reset --hard HEAD^ // commit을 취소하고 내용도 삭제함
-git reset --soft // commit을 취소하고 내용은 staged 상태로 남겨둠
+git reset --soft HEAD^ // commit을 취소하고 내용은 staged 상태로 남겨둠
 git reset HEAD^ // commit을 취소하고 내용은 unstaged 상태로 남겨둠
 
 4) git push를 한 경우
 git reset HEAD^ // local repository에서 commit을 하나 되돌림(여러개 하고 싶다면 HEAD뒤에 ^을 개수만큼 붙이면 됨)
 git push origin master // 원격 저장소에 커밋하나 뺀 채로 저장
+```
+
+## Git HEAD & Master
+
+![02-5](./Subject2/02-5.PNG)
+처음 a라는 커밋을 하고 그 다음 b커밋을 만들게 되면 새로 만든 커밋은 이전커밋을 가리키는 포인터를 생성합니다.<br>
+마찬가지로 c라는 커밋을 하게되면 바로 이전 b커밋을 가리키고 d커밋도 c커밋을 가리키는 형식이 된다.<br>
+이렇게 커밋을 해나가는 줄기를 `Master Branch`라고 하며 `HEAD`는 가장 최근에 커밋한 d를 가리키게 됩니다.<br>
+head에서 물결(~)을 붙이고 숫자를 붙이게되면 현재 헤드보다 숫자만큼 이전버전을 가리키며 원하면 언제든지 head를 이동시킬 수 있습니다.<br>
+
+```
+git log --oneline #깃 로그를 한줄로 보여주며 짧은 해시코드도 보여줌
+git checkout (커밋해쉬코드) #해시코드를 가진 커밋을 head로 원하는 시점으로 돌아갈 수 있다.
+git checkout master #마스터를 head로 이동
 ```
