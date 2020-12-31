@@ -162,3 +162,39 @@ Git으로 별도로 지정하지 않는 이상 master branch가 기본적으로 
 merge 후 feature A 브랜치는 더 이상 필요 없으니 삭제하기도 가능합니다.<br>
 ![03-5](./Subject3/03-5.PNG)
 또한 feature A를 그대로 병합해오기보단 e와 f에서 필요한 것만 가져와 i 커밋을 만들고 이것을 마스터 브랜치로 병합하는 방법을 사용하는 방법도 있습니다.<br>
+
+## Fast-Forward-Merges와 Three-Way-Merges의 차이
+
+![03-6](./Subject3/03-6.PNG)
+
+1. Fast Forward Merges<br>
+   마스터 브랜치가 있고 feature A 라는 브랜치에 e와 f가 추가된 형식이다.<br>
+   여기서 중요한 점은 브랜치가 나뉘고 나서 master 브랜치에는 아무것도 추가가 되지 않았다는 점입니다.<br>
+   브랜치가 나뉜 후 마스터 브랜치에서 커밋을 한 기록이 없기 때문에 `Fast Forward Merges`를 할 수 있게 됩니다.<br>
+   그저 merge를 하게 되면 master 브랜치에서 d를 가리키는 HEAD가 feature A의 f로 이동하는 것 뿐이기 때문에 merge commit도 발생하지 않고 모르는 사람이 본다면 merge한 기록이 없기 때문에 마치 한 사람이 작업한 것처럼 보일 것 입니다.<br>
+   개인적으로는 이 방법을 선호한다.<br>
+   줄여서 ff라고도 하는데 ff를 하는 방법은 간단하다.<br>
+
+```
+git merge featureA(fast forward가 가능하다면 아무 옵션 없이 해도 ff로 merge될 것이다.)
+```
+
+![03-7](./Subject3/03-7.PNG) 2. Three Way Merges<br>
+Fast Forward 방식을 싫어거나 어떻게든 merge된 commit을 기록으로 남기고 싶다면 사용하는 방식이다.<br>
+아래의 명령어로 Three Way Merge를 할 수 있다.<br>
+
+```
+git merge --no-ff featureA(No Fast Forward옵션을 추가함으로써 Three Way Merge로 전향합니다.)
+```
+
+1번과 2번 둘 다 merge를 한다는 점에서는 다를점이 없지만 merge commit을 남길 것인가 아닌가에 대한 차이점이 있다.<br>
+또한 Three Way Merge를 어쩔 수 없이 써야하는 경우가 있다.<br>
+![03-8](./Subject3/03-8.PNG)
+브랜치가 나뉜 후 마스터 브랜치에서 커밋을 하여 마스터의 변경된 점까지 merge해야하는 경우이다.<br>
+이런 경우 ff를 하게 되면 위 사진에서 브랜치가 나뉜 후 마스터 브랜치에서 변경된 g 커밋은 적용되지 않게 된다.<br>
+따라서 마스터 브랜치의 변경된 점까지 merge를 할 때 사용하는 방식으로 Three Way Merges 사용합니다.<br>
+방법은 다음과 같다.<br>
+
+```
+git merge featureA(위에서 한 방법과 같은데 ff가 가능하면 ff로 알아서 적용되지만 ff가 안되는 경우 tw로 전향하여 적용되기 때문에 명령어가 같다.)
+```
