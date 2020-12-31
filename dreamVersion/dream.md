@@ -1,6 +1,8 @@
 # Dream Version
 
-## Git 초기화하고 Github에 push하기
+## SetUp
+
+### Git 초기화하고 Github에 push하기
 
 먼저 Github에 push하기 위해서는 Git WorkFlow 흐름에 대해서 정확히 알고 있어야 한다.<br>
 ![01-2](./Subject1/01-1.PNG)
@@ -20,7 +22,11 @@ Git WorkFlow는 총 3가지 작업환경으로 나누어져 있습니다.<br>
 4. git remote add origin <url>(원격 저장소, 즉 깃허브 어디에 저장할 것인지를 정함)<br>
 5. git push origin master(원격 저장소에 커밋을 푸쉬함 or 히스토리를 업데이트함!)<br>
 
-## Git Workflow
+---
+
+## Basic
+
+### Git Workflow
 
 ![02-1](./Subject2/02-1.PNG)
 Working Directory에는 2가지로 분류될 수 있습니다.<br>
@@ -41,7 +47,7 @@ Working Directory에는 2가지로 분류될 수 있습니다.<br>
 3. 여기서 echo tsuel >> a.txt 명령어를 사용해 a텍스트파일에 내용을 추가하니 tracked에서 a.txt가 modified 상태가 된 것을 알 수 있습니다.<br>
    git status를 통해 확인해보면 아직 커밋될 준비가 되지않은 modified된 a.txt가 하나 존재하는 것을 알 수 있습니다.<br>
 
-## 커밋할 때 팁
+### 커밋할 때 팁
 
 우리가 파일들을 수정하고 변경한 다음에 마음에 들면 Stagin Area로 옮겨두고 커밋을 하기로 마음을 먹게되면 커밋을 통해 버전을 만들 수 있습니다.<br>
 그렇다면 Git Repository에 올라가는 커밋은 어떤 규모가 적당할까?<br>
@@ -53,7 +59,7 @@ Working Directory에는 2가지로 분류될 수 있습니다.<br>
 또한 커밋을 1, 2, 3 ... 순으로 하기보단 위와 같이 무엇을 했는지 알 수 있게 하나하나 의미있는 이름을 지정해서 히스토리를 바라봤을 때 어디서 무엇을 작업했는지 알 수 있게 작성하는 것이 좋습니다.<br>
 이렇게 의미있는 이름으로 저장을 하게되면 내가 코드 유지보수를 하는 것도 쉬워지며 원하지 않는 커밋의 취소도 쉬워집니다.<br>
 
-## Git 명령어가 있는 것과 없는 것의 차이
+### Git 명령어가 있는 것과 없는 것의 차이
 
 깃 명령어가 없으면 작업 디렉토리에서만 적용되지만 깃 명령어와 함께라면 staging area에도 적용이 되는 것 같다.
 
@@ -65,7 +71,7 @@ git rm c.txt // working directory에서 삭제되는 것 뿐만 아니라 stagin
 rm 명령어만 그런 것이 아니고 대체적으로 git에서도 사용할 수 있는 명령어는 거의 git과 같이 쓰면 statging area에 적용되고 아니면 working directory에만 적용이 되는 듯 하다.
 ```
 
-## Git 수정 내역 취소하기
+### Git 수정 내역 취소하기
 
 ```
 1) git add 이전, stage에 올리지 않은 경우
@@ -87,7 +93,7 @@ git reset HEAD^ // local repository에서 commit을 하나 되돌림(여러개 �
 git push origin master // 원격 저장소에 커밋하나 뺀 채로 저장
 ```
 
-## Git HEAD & Master
+### Git HEAD & Master
 
 ![02-5](./Subject2/02-5.PNG)
 처음 a라는 커밋을 하고 그 다음 b커밋을 만들게 되면 새로 만든 커밋은 이전커밋을 가리키는 포인터를 생성합니다.<br>
@@ -101,7 +107,7 @@ git checkout (커밋해쉬코드) #해시코드를 가진 커밋을 head로 원�
 git checkout master #마스터를 head로 이동
 ```
 
-## Git Log Format
+### Git Log Format
 
 브랜치가 여러개 있을 때 Git Log를 좀 더 명확하게 보고 싶다면 format을 지정해서 브랜치별로 history를 보는 것이 가능하다.<br>
 ![02-6](./Subject2/02-6.PNG)
@@ -120,7 +126,7 @@ git config --global alias.logformat "log --graph --all --pretty=format:'%C(yello
 git logformat
 ```
 
-## Git Tag
+### Git Tag
 
 ![02-7](./Subject2/02-7.PNG)
 Git Hitstory에 커밋들이 매우 많아지기 시작한다면 자신이 원할 때 특정 커밋으로 돌아가고 싶을 때 어려움이 있을 수 있습니다.<br>
@@ -134,3 +140,25 @@ semantic versioning은 major minor fix로 나뉘는데
 2. minor(일부 기능들이 업데이트 되었을 때 갱신)
 3. fix(오류 개선을 했을 때 갱신)
    과 같은 3가지로 구분합니다.<br>
+
+---
+
+## Branch
+
+### 브랜치를 왜 써야할까?
+
+![03-1](./Subject3/03-1.PNG)
+Git으로 별도로 지정하지 않는 이상 master branch가 기본적으로 사용이 됩니다.<br>
+따라서 브랜치를 만들지 않는 경우 master branch에서만 커밋이 일어나게 되죠.<br>
+보통 master branch에서는 코드가 검증되고 기능에 문제가 없는 코드들로만 구성이 되어있는데<br>
+만약 여기서 새로운 기능인 feature A를 개발한다고 하면 마스터 브랜치에서 개발을 하기 보다는 아래처럼
+![03-2](./Subject3/03-2.PNG)
+새로운 feature A 브랜치를 만들어서 새로운 기능을 개발합니다.<br>
+![03-3](./Subject3/03-3.PNG)
+또한 브랜치가 있기 때문에 기능별로 새로운 브랜치를 만들게 되면 병렬적으로 새로운 기능을 개발하는데 매우 적합합니다.<br>
+만약 이런 상황에서 feature A의 기능이 개발 완료되고 이것을 가져오고 싶다고 하면<br>
+![03-4](./Subject3/03-4.PNG)
+이렇게 마스터 브랜치에 `merge`할 수 있습니다.<br>
+merge 후 feature A 브랜치는 더 이상 필요 없으니 삭제하기도 가능합니다.<br>
+![03-5](./Subject3/03-5.PNG)
+또한 feature A를 그대로 병합해오기보단 e와 f에서 필요한 것만 가져와 i 커밋을 만들고 이것을 마스터 브랜치로 병합하는 방법을 사용하는 방법도 있습니다.<br>
