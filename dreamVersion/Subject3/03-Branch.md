@@ -39,4 +39,27 @@ git diff branch1..branch2 #branch1과 branch2의 다른 내용들을 보여줌
 ```
 git merge featureA #현재 있는 브랜치에 featureA브랜치를 merge함
 git merge --no-ff featureA #fast forward로 merge하지 않고 merge commit을 남김
+git merge --continue # conflict가 일어났을 때 충돌 내역을 수정하고 계속 진행하고 싶을 때 사용하는 명령어
+git merge --abort # merge를 취소할 때 사용
+git mergetool #merge하는 tool을 오픈합니다.
+```
+
+### Merge Tool Config
+
+```
+[merge]
+tool = vscode
+[mergetool]
+keepBackup = false
+[mergetool "vscode"]
+cmd = code --wait $MERGED
+[mergetool "p4merge"]
+path = "/Applications/p4merge.app/Contents/MacOS/p4merge"
+```
+
+## Rebasing
+
+```
+git rebase master #현재 브랜치를 마스터 브랜치로 rebase(베이스를 재배치)합니다.
+git rebase --onto master service ui #service 브랜치 위에 있는 ui브랜치를 마스터 브랜치로 rebase합니다.
 ```
