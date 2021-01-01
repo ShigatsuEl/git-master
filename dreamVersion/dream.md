@@ -163,7 +163,7 @@ merge 후 feature A 브랜치는 더 이상 필요 없으니 삭제하기도 가
 ![03-5](./Subject3/03-5.PNG)
 또한 feature A를 그대로 병합해오기보단 e와 f에서 필요한 것만 가져와 i 커밋을 만들고 이것을 마스터 브랜치로 병합하는 방법을 사용하는 방법도 있습니다.<br>
 
-## Fast-Forward-Merges와 Three-Way-Merges의 차이
+### Fast-Forward-Merges와 Three-Way-Merges의 차이
 
 ![03-6](./Subject3/03-6.PNG)
 
@@ -198,3 +198,66 @@ git merge --no-ff featureA(No Fast Forward옵션을 추가함으로써 Three Way
 ```
 git merge featureA(위에서 한 방법과 같은데 ff가 가능하면 ff로 알아서 적용되지만 ff가 안되는 경우 tw로 전향하여 적용되기 때문에 명령어가 같다.)
 ```
+
+### Conflict 해결하기
+
+Git Conflict는 서로 다른 브랜치에서 같은 파일의 같은 내용을 수정할 때 충돌이 일어나며 Git이 도대체 어떤 브랜치의 수정내역을 가져가야 하는지에 대한 상황이 발생하는 것을 말합니다.<br>
+Git Conflict를 해결하는 방법으로는 여러가지가 있는데 수동으로 하는 방법과 툴을 사용해 해결하는 방법이 있습니다.<br>
+
+먼저 마스터 브랜치와 feature브랜치 2개가 있다고 가정합니다.<br>
+둘 다 main.txt를 가지고 있고 서로 다른 내용을 가지고 있다면 마스터 브랜치에서 feature브랜치를 merge할 때 Conflict가 발생할 것 입니다.<br>
+Conflict를 해결하기 위해서<br>
+
+1. 수동으로 수정하기<br>
+   main.txt를 오픈하면 원래 있던 파일의 내용에서 알 수 없는 문자열이 추가된 것을 볼 수 있습니다.<br>
+   ```
+   <<<<<< HEAD
+   Oh.. Here!! From master branch!
+   =======
+   Oh.. Here!! From feature branch!
+   >>>>>> feature
+   ```
+   HEAD부터는 마스터 브랜치에서 충돌한 코드이며 feature은 feature 브랜치에서 충돌한 코드의 내용을 보여줍니다.<br>
+   1. 마스터 브랜치의 코드 가져가기<br>
+      HEAD 코드 이외의 것들을 삭제하고 저장합니다.<br>
+   2. feature 브랜치의 코드 가져가기<br>
+      feature 코드 이외의 것들을 삭제하고 저장합니다.<br>
+   3. 마스터와 feature 브랜치 코드 둘 다 살리기<br>
+      HEAD코드와 feature코드를 남기고 저장합니다.<br>
+2. 툴을 사용해 저장하기(VSCode)
+   툴을 사용하면 수동으로 하나씩 수정하지 않아도 버튼 하나로도 어떤 브랜치의 코드를 가져갈 수 있는지 선택하는 것이 가능합니다.<br>
+   먼저 VSCode를 사용해 충돌을 해결하려면 아래의 명령어를 사용해 설정을 해줍니다.<br>
+
+```
+git config --global -e # 깃 설정을 전역적으로 설정하는데 에디터를 사용함
+
+[merge]
+	tool = vscode
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
+[mergetool]
+	keepBackup = false
+
+위와 같이 에디터에서 mergetool에 관련된 설정을 합니다.
+mergetool 명령어를 사용하면 merge 명령어가 자동으로 실행되며 VSCode가 열릴 때까지 기다리는 역할을 합니다.
+keepBackup은 VSC로 merge를 하게되면 원래 충돌되었을 때의 원본 파일인 .orig 파일을 생성하지 않는 것을 의미합니다.
+```
+
+위와 같은 설정을 마치고
+
+```
+git mergetool
+```
+
+명령어를 실행하면 아래와 같이 VSCode가 열리게 됩니다.<br>
+![03-9](./Subject3/03-9.PNG)
+위를 자세히 보면 Conflict된 내역에서 총 4가지 선택사항이 있습니다.<br>
+
+1. Accept Current Change -> 현재 마스터 브랜치의 커밋을 적용합니다.
+2. Accept Incoming Change -> merge된 브랜치(feature)의 커밋을 적용합니다.
+3. Accept Both Change -> 마스터와 feature 브랜치 2개의 커밋을 적용합니다.
+4. Compare Change -> 마스터와 feature 브랜치의 차이점을 더 알기 쉽게 보여줍니다.
+
+어떤 브랜치의 커밋을 가져갈 것인지 결정 후 저장한 다음 VSCode를 나오게 되면 git status를 통해 확인 시 충돌된 코드가 수정되어 적용이 된 것을 확인할 수 있습니다.<br>
+이제 `git merge --continue`명령어를 사용하면 `Three way Merges`를 통해 merge를 계속해서 할 수 있습니다.<br>
+현업에서는 VSCode 외에도 P4Merge라는 툴을 사용한다고 하는데 현재로서는 VSCode만 있어도 될 듯 싶다.<br>
