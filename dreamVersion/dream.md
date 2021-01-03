@@ -261,3 +261,23 @@ git mergetool
 어떤 브랜치의 커밋을 가져갈 것인지 결정 후 저장한 다음 VSCode를 나오게 되면 git status를 통해 확인 시 충돌된 코드가 수정되어 적용이 된 것을 확인할 수 있습니다.<br>
 이제 `git merge --continue`명령어를 사용하면 `Three way Merges`를 통해 merge를 계속해서 할 수 있습니다.<br>
 현업에서는 VSCode 외에도 P4Merge라는 툴을 사용한다고 하는데 현재로서는 VSCode만 있어도 될 듯 싶다.<br>
+
+### Stashing이 무엇이고 왜 중요할까?
+
+![04-1](./Subject4/04-1.PNG)
+우리가 working directory에서 무언가를 작업하고 있다고 가정합시다.<br>
+그런데 위와 같이 직장 사수가 내 브랜치를 지금 당장 테스트 해줬으면 좋겠다고 합니다.<br>
+이럴 경우에 우리가 working directory에서 작업하고 있는 것들을 어떻게 해야 좋을까요?<br>
+커밋을 하자니 완벽한 기능을 만들지 않았는데 커밋하는 것은 별로이며 그렇다고 working directory에서 작업한 것을 싹 다 지우고 브랜치를 테스트 하자니 지금까지 작업하던 것들을 테스트가 끝나고 다시 작업하려니 시간적으로 낭비가 큽니다.<br>
+따라서 지금하고 있는 작업들을 잠시 보관해뒀다 브랜치 테스트가 끝나고 다시 가져와서 하고 싶은 겁니다.<br>
+이러한 경우에 우리는 `Stash`를 사용해 working directory에서 하고 있던 작업들을 잠시 저장해둘 수 있습니다.<br>
+![04-2](./Subject4/04-2.PNG)
+Stash 기능 덕분에 위 캡처와 같이 working directory에서 작업하던 내용들을 모두 stash하여 stash stack에 잠시 옮겨두고 branch를 테스트가 끝나면 다시 stash stack에서 stash를 가져와서 작업을 이어서 진행할 수 있습니다.<br>
+
+```
+Stash에 저장하는 명령어는 push
+Stash에 있는 내용을 보는 명령어는 show
+Stash에 있는 내용을 가져오면서 남겨두는 명령어는 apply
+Stash에 있는 내용을 가져오면서 삭제하는 명령어는 pop
+Stash를 삭제하는 명령어는 drop or clear 등이 있습니다.
+```
