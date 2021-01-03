@@ -63,3 +63,9 @@ path = "/Applications/p4merge.app/Contents/MacOS/p4merge"
 git rebase master #현재 브랜치를 마스터 브랜치로 rebase(베이스를 재배치)합니다.
 git rebase --onto master service ui #service 브랜치 위에 있는 ui브랜치를 마스터 브랜치로 rebase합니다.
 ```
+
+## Cherry Picking
+
+```
+git cherry-pick hash #예를 들어 브랜치 중 하나의 커밋만 가져오고 싶다면 그 커밋의 해시코드를 cherry-pick하여 가져올 수 있다.
+```
