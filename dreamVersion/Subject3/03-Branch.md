@@ -69,3 +69,5 @@ git rebase --onto master service ui #service 브랜치 위에 있는 ui브랜치
 ```
 git cherry-pick hash #예를 들어 브랜치 중 하나의 커밋만 가져오고 싶다면 그 커밋의 해시코드를 cherry-pick하여 가져올 수 있다.
 ```
+
+[(C)Dream Coding Academy](https://academy.dream-coding.com/)

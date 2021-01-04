@@ -32,3 +32,5 @@ git stash branch branchName #새로운 브랜치를 만듬과 동시에 stash를
 git stash drop hash #해쉬 stash를 삭제합니다.
 git stash clear #모든 stash를 삭제합니다.
 ```
+
+[(C)Dream Coding Academy](https://academy.dream-coding.com/)
