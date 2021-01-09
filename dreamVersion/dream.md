@@ -480,3 +480,5 @@ git bisect는 이진탐색으로 문제가 어디서 발생했는지 쉽게 알�
 그 다음 마스터 브랜치로 이동해 `git bisect bad`명령어로 설정해주면 이제 bisect가 이진탐색을 몇번을 해야되는지 알려주며 good과 bad의 중간지점의 커밋으로 이동합니다.<br>
 중간지점의 커밋에서도 이슈가 발생하지 않는다면 다시 git bisect good 명령어를 사용해 다음 중간커밋으로 이동하게되고 만약 이슈가 발생해 git bisect bad명령어를 사용하게 되면 이제 브랜치와 맨처음 bisect start한 커밋 사이에서 비교하는 것이 아닌 방금 bad라고 지정해준 커밋과 bisect start커밋 사이에서 다시 bisect를 하게됩니다.<br>
 즉, 이렇게 범위를 계속해서 줄여나가면 눈에서 보이지 않는 오류를 가진 커밋을 bisect가 알려주게 됩니다.<br>
+
+[(C)Dream Coding Academy](https://academy.dream-coding.com/)
