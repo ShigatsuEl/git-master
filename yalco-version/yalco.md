@@ -329,3 +329,81 @@ git switch -t origin/from-remote
 ```
 git push (원격 이름) --delete (원격의 브랜치명)
 ```
+
+## Git 보다 깊이 알기
+
+### Git의 3가지 공간
+
+- Working directory
+
+  untracked: Add된 적 없는 파일, ignore 된 파일
+
+  tracked: Add된 적 있고 변경내역이 있는 파일
+
+  git add 명령어로 Staging area로 이동
+
+- Staging area
+
+  커밋을 위한 준비 단계
+
+  git commit 명령어로 repository로 이동
+
+- Repository
+
+  .git directory라고도 불림
+
+  커밋된 상태
+
+#### 파일의 삭제와 이동
+
+```
+git rm
+```
+
+```
+git mv
+```
+
+#### 파일을 staging area에서 working directory로
+
+```
+git restore --staged (파일명)
+git restore (파일명) --staged를 빼면 working directory에서도 제거
+```
+
+#### reset의 세 가지 옵션
+
+- --soft: repository에서 staging area로 이동
+- --mixed (default): repository에서 working directory로 이동
+- --hard: 수정사항 완전히 삭제
+
+### HEAD
+
+#### checkout으로 앞뒤 이동해보기
+
+^ 또는 ~: 갯수만큼 이전으로 이동
+
+```
+git checkout HEAD^
+git checkout HEAD~5
+```
+
+#### HEAD 사용하여 reset하기
+
+```
+git reset HEAD(원하는 단계) (옵션)
+```
+
+### fetch vs. pull
+
+#### fetch와 pull의 차이
+
+- fetch: 원격 저장소의 최신 커밋을 로컬로 가져오기만 함
+- pull: 원격 저장소의 최신 커밋을 로컬로 가져와 merge 또는 rebase
+
+#### 원격의 새 브랜치 확인
+
+```
+git checkout origin/(브랜치명)
+git switch -t origin/(브랜치명)
+```
