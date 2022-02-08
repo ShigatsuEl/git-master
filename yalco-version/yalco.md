@@ -208,3 +208,124 @@ git rebase --continue
 ```
 
 충돌이 모두 해결될 때까지 반복
+
+## GitHub 사용하기
+
+### 원격 저장소 사용하기
+
+#### 로컬의 Git 저장소에 원격 저장소로의 연결 추가
+
+원격 저장소 이름에 흔히 origin 사용. 다른 것으로 수정 가능
+
+```
+git remote add origin (원격 저장소 주소)
+```
+
+#### GitHub 권장 - 기본 브랜치명을 main으로
+
+```
+git branch -M main
+```
+
+#### 로컬 저장소의 커밋 내역들 원격으로 push(업로드)
+
+-u 또는 --set-upstream : 현재 브랜치와 명시된 원격 브랜치 기본 연결
+
+```
+git branch -M main
+```
+
+### push와 pull
+
+#### 원격으로 커밋 밀어올리기(push)
+
+```
+git push
+```
+
+이미 git push -u origin main으로 대상 원격 브랜치가 지정되었기 때문에 가능
+
+#### 원격의 커밋 당겨오기(pull)
+
+```
+git pull
+```
+
+#### pull 할 것이 있을 때 push를 하면?
+
+1. 로컬에서 내용 수정
+
+2. GitHub에서 수정(다른 사람이 먼저 push를 했다고 가정) 후 push
+
+3. push 해보기
+
+원격에 먼저 적용된 새 버전이 있으므로 적용 불가
+pull 해서 원격의 버전을 받아온 다음 push 가능
+
+4. push 할 것이 있을 시 pull 하는 두 가지 방법
+
+- `git pull --no-rebase` - merge 방식
+
+- `git pull --rebase` - rebase 방식
+
+  pull 상의 rebase는 다름 (협업시 사용 OK)
+
+5. push하기
+
+#### 협업상 충돌 발생 해결하기
+
+1. 로컬에서 파일 내용 수정
+
+2. 원격에서 같은 파일의 같은 내용 수정(다른 사람이 먼저 push를 했다고 가정) 후 push
+
+3. pull 하여 충돌상황 마주하기
+
+#### 로컬의 내역 강제 push해보기
+
+로컬의 내역 충돌 전으로 reset
+
+```
+git push --force
+```
+
+### 원격의 브랜치 다루기
+
+#### 로컬에서 브랜치 만들어 원격에 push 해보기
+
+1. from-local 브랜치 만들기
+
+2. 아래 명령어로 원격에 push
+
+```
+git push -u origin from-local
+git push(1번 라인 이후)
+```
+
+3. 브랜치 목록 살펴보기
+
+```
+git branch --all
+```
+
+#### 원격의 브랜치 로컬에 받아오기
+
+1. GitHub에서 from-remote 브랜치 만들기
+
+2. 아래 명령어로 원격의 변경사항 확인
+
+```
+git fetch
+git branch -a
+```
+
+3. 아래 명령어로 로컬에 같은 이름의 브랜치를 생성하여 연결하고 switch
+
+```
+git switch -t origin/from-remote
+```
+
+#### 원격의 브랜치 삭제
+
+```
+git push (원격 이름) --delete (원격의 브랜치명)
+```
